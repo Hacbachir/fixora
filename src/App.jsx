@@ -9,9 +9,8 @@ const tools = [
   {
     id: "image-compressor",
     name: "Image Compressor",
-    icon: "ðŸ–¼ï¸",
-    description:
-      "Reduce image size while keeping good quality.",
+    icon: "🖼️",
+    description: "Reduce image size while keeping good quality.",
     keywords:
       "image compress compressor photo jpg jpeg png webp picture",
     available: true,
@@ -19,21 +18,18 @@ const tools = [
   {
     id: "pdf-tools",
     name: "PDF Tools",
-    icon: "ðŸ“„",
-    description:
-      "Work with PDF files quickly and easily.",
+    icon: "📄",
+    description: "Work with PDF files quickly and easily.",
     keywords:
-      "pdf document file merge split compress compressor combine extract",
+      "pdf document file merge split compress combine extract",
     available: true,
   },
   {
     id: "file-tools",
     name: "File Tools",
-    icon: "ðŸ“",
-    description:
-      "Useful tools for everyday file problems.",
-    keywords:
-      "file convert document",
+    icon: "📁",
+    description: "Useful tools for everyday file problems.",
+    keywords: "file convert document",
     available: false,
   },
 ]
@@ -41,21 +37,21 @@ const tools = [
 const steps = [
   {
     number: "01",
-    icon: "ðŸ”Ž",
+    icon: "🔎",
     title: "Choose a Tool",
     description:
       "Select the tool that matches the task you want to complete.",
   },
   {
     number: "02",
-    icon: "ðŸ“¤",
+    icon: "📤",
     title: "Upload Your File",
     description:
-      "Upload your image or PDF and let the tool do the work.",
+      "Upload your image or PDF and let Fixora do the work.",
   },
   {
     number: "03",
-    icon: "â¬‡ï¸",
+    icon: "⬇️",
     title: "Download Result",
     description:
       "Download your processed file quickly and easily.",
@@ -64,7 +60,7 @@ const steps = [
 
 function BackButton({
   onClick,
-  children = "â† Back to Tools",
+  children = "← Back to Tools",
 }) {
   return (
     <button
@@ -95,53 +91,36 @@ function App() {
     if (!searchText) {
       document
         .getElementById("tools")
-        ?.scrollIntoView({
-          behavior: "smooth",
-        })
-
+        ?.scrollIntoView({ behavior: "smooth" })
       return
     }
 
     const matchingTool = tools.find((tool) => {
-      const searchableText =
-        tool.name +
-        " " +
-        tool.description +
-        " " +
-        tool.keywords
-
-      return searchableText
+      const searchableText = [
+        tool.name,
+        tool.description,
+        tool.keywords,
+      ]
+        .join(" ")
         .toLowerCase()
-        .includes(searchText)
+
+      return searchableText.includes(searchText)
     })
 
-    if (matchingTool) {
-      if (matchingTool.available) {
-        setActiveTool(matchingTool.id)
-      } else {
-        document
-          .getElementById("tools")
-          ?.scrollIntoView({
-            behavior: "smooth",
-          })
-      }
-
+    if (matchingTool && matchingTool.available) {
+      setActiveTool(matchingTool.id)
       return
     }
 
     document
       .getElementById("tools")
-      ?.scrollIntoView({
-        behavior: "smooth",
-      })
+      ?.scrollIntoView({ behavior: "smooth" })
   }
 
   if (page === "privacy") {
     return (
       <div>
-        <BackButton
-          onClick={() => setPage("home")}
-        />
+        <BackButton onClick={() => setPage("home")} />
         <Privacy />
       </div>
     )
@@ -150,9 +129,7 @@ function App() {
   if (page === "terms") {
     return (
       <div>
-        <BackButton
-          onClick={() => setPage("home")}
-        />
+        <BackButton onClick={() => setPage("home")} />
         <Terms />
       </div>
     )
@@ -161,9 +138,7 @@ function App() {
   if (page === "about") {
     return (
       <div>
-        <BackButton
-          onClick={() => setPage("home")}
-        />
+        <BackButton onClick={() => setPage("home")} />
         <About />
       </div>
     )
@@ -172,9 +147,7 @@ function App() {
   if (activeTool === "image-compressor") {
     return (
       <div>
-        <BackButton
-          onClick={() => setActiveTool(null)}
-        />
+        <BackButton onClick={() => setActiveTool(null)} />
         <ImageCompressor />
       </div>
     )
@@ -183,64 +156,54 @@ function App() {
   if (activeTool === "pdf-tools") {
     return (
       <div>
-        <BackButton
-          onClick={() => setActiveTool(null)}
-        />
+        <BackButton onClick={() => setActiveTool(null)} />
         <PdfTools />
       </div>
     )
   }
 
-  const filteredTools = tools.filter((tool) => {
-    const searchText = search.toLowerCase().trim()
+  const searchText = search.toLowerCase().trim()
 
+  const filteredTools = tools.filter((tool) => {
     if (!searchText) {
       return true
     }
 
-    const searchableText =
-      tool.name +
-      " " +
-      tool.description +
-      " " +
-      tool.keywords
-
-    return searchableText
+    const searchableText = [
+      tool.name,
+      tool.description,
+      tool.keywords,
+    ]
+      .join(" ")
       .toLowerCase()
-      .includes(searchText)
+
+    return searchableText.includes(searchText)
   })
 
   return (
     <div className="app">
       <header className="header">
-        <div className="logo">
-          Fixora
-        </div>
+        <div className="logo">Fixora</div>
 
         <nav>
-          <a href="#tools">
-            Tools
-          </a>
-
-          <a href="#how">
-            How it works
-          </a>
+          <a href="#tools">Tools</a>
+          <a href="#how">How it works</a>
         </nav>
       </header>
 
       <main>
         <section className="hero">
           <p className="eyebrow">
-            FAST â€¢ SIMPLE â€¢ FREE
+            FAST • SIMPLE • FREE
           </p>
 
           <h1>
-            What do you need to do?
+            Fix your files in seconds.
           </h1>
 
           <p className="subtitle">
-            Find the right digital tool to
-            solve your task in seconds.
+            Simple online tools to compress,
+            merge, split and manage your files.
           </p>
 
           <div className="search-box">
@@ -255,7 +218,7 @@ function App() {
                   findTool()
                 }
               }}
-              placeholder="Example: Compress an image..."
+              placeholder="What do you need to fix?"
             />
 
             <button onClick={findTool}>
@@ -264,18 +227,22 @@ function App() {
           </div>
         </section>
 
-        <section
-          id="tools"
-          className="tools"
-        >
+        <section id="tools" className="tools">
+          <p className="eyebrow">
+            FIXORA TOOLS
+          </p>
+
           <h2>
             Popular Tools
           </h2>
 
+          <p className="how-intro">
+            Free, simple tools for your everyday files.
+          </p>
+
           {filteredTools.length === 0 ? (
             <p className="no-results">
-              No tools found. Try another
-              search.
+              No tools found. Try another search.
             </p>
           ) : (
             <div className="tool-grid">
@@ -285,8 +252,7 @@ function App() {
                   key={tool.id}
                 >
                   <h3>
-                    {tool.icon}{" "}
-                    {tool.name}
+                    {tool.icon} {tool.name}
                   </h3>
 
                   <p>
@@ -312,10 +278,7 @@ function App() {
           )}
         </section>
 
-        <section
-          id="how"
-          className="how"
-        >
+        <section id="how" className="how">
           <p className="eyebrow">
             SIMPLE PROCESS
           </p>
@@ -325,8 +288,7 @@ function App() {
           </h2>
 
           <p className="how-intro">
-            Get your task done in just
-            three simple steps.
+            Get your task done in three simple steps.
           </p>
 
           <div className="steps-grid">
@@ -367,24 +329,17 @@ function App() {
 
             <p>
               Simple online tools for your
-              everyday file and document
-              tasks.
+              everyday file and document tasks.
             </p>
           </div>
 
           <div className="footer-links">
-            <a href="#tools">
-              Tools
-            </a>
+            <a href="#tools">Tools</a>
 
-            <a href="#how">
-              How it works
-            </a>
+            <a href="#how">How it works</a>
 
             <button
-              onClick={() =>
-                setPage("about")
-              }
+              onClick={() => setPage("about")}
               style={{
                 background: "none",
                 border: "none",
@@ -399,9 +354,7 @@ function App() {
             </button>
 
             <button
-              onClick={() =>
-                setPage("privacy")
-              }
+              onClick={() => setPage("privacy")}
               style={{
                 background: "none",
                 border: "none",
@@ -416,9 +369,7 @@ function App() {
             </button>
 
             <button
-              onClick={() =>
-                setPage("terms")
-              }
+              onClick={() => setPage("terms")}
               style={{
                 background: "none",
                 border: "none",
@@ -435,7 +386,9 @@ function App() {
         </div>
 
         <div className="footer-bottom">
-          Â© {new Date().getFullYear()} Fixora. All rights reserved.
+      
+         © {new Date().getFullYear()} Fixora.
+          All rights reserved.
         </div>
       </footer>
     </div>
