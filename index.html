@@ -1,14 +1,35 @@
-﻿<!doctype html>
+﻿```html
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fixora — simple online tools for your everyday file and document tasks." />
+    <meta
+      name="description"
+      content="Fixora — simple online tools for your everyday file and document tasks."
+    />
     <meta name="theme-color" content="#ffffff" />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-77D97DW6MP"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-77D97DW6MP");
+    </script>
+
     <title>Fixora — Simple Online Tools</title>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+```
