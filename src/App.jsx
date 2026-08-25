@@ -6,79 +6,134 @@ import Terms from "./Terms"
 import About from "./About.jsx"
 import Contact from "./Contact.jsx"
 
+const SITE_URL = "https://fixora-tools.pages.dev"
+
+const categories = [
+  {
+    id: "image",
+    name: "Image Tools",
+    icon: "image",
+    description:
+      "Compress, optimize and prepare images for websites, sharing and everyday use.",
+    status: "available",
+  },
+  {
+    id: "pdf",
+    name: "PDF Tools",
+    icon: "pdf",
+    description:
+      "Compress, merge and split PDF documents quickly from one simple workspace.",
+    status: "available",
+  },
+  {
+    id: "ai",
+    name: "AI Tools",
+    icon: "ai",
+    description:
+      "Useful AI-powered tools for writing, text, ideas and everyday productivity.",
+    status: "coming",
+  },
+  {
+    id: "creator",
+    name: "Creator Tools",
+    icon: "creator",
+    description:
+      "Simple tools for creators working with content, images, video and social media.",
+    status: "coming",
+  },
+  {
+    id: "calculators",
+    name: "Calculators",
+    icon: "calculator",
+    description:
+      "Practical calculators for everyday decisions, work, study and planning.",
+    status: "coming",
+  },
+]
+
 const tools = [
   {
     id: "image-compressor",
     route: "/tools/image-compressor",
+    category: "image",
     name: "Image Compressor",
     icon: "image",
     description:
       "Reduce image file size while keeping your images sharp and ready to share.",
     seoTitle:
-      "Image Compressor Online — Reduce Image Size | Fixora",
+      "Image Compressor Online - Reduce Image Size | Fixora",
     seoDescription:
       "Compress JPG, PNG and WebP images online with Fixora. Reduce image file size quickly while keeping your images looking sharp.",
     keywords:
       "image compressor compress image image size reducer jpg compressor png compressor webp compressor",
+    available: true,
   },
   {
     id: "pdf-compressor",
     route: "/tools/pdf-compressor",
+    category: "pdf",
     name: "PDF Compressor",
     icon: "compress",
     description:
       "Reduce PDF file size quickly when you need a lighter document.",
     seoTitle:
-      "PDF Compressor Online — Reduce PDF Size | Fixora",
+      "PDF Compressor Online - Reduce PDF Size | Fixora",
     seoDescription:
       "Compress PDF files online with Fixora and reduce document size for sharing, storage and uploads.",
     keywords:
       "pdf compressor compress pdf reduce pdf size shrink pdf pdf size reducer",
     pdfAction: "compress",
+    available: true,
   },
   {
     id: "pdf-merger",
     route: "/tools/pdf-merger",
+    category: "pdf",
     name: "PDF Merger",
     icon: "merge",
     description:
       "Combine multiple PDF files into one clean document.",
     seoTitle:
-      "Merge PDF Online — Combine PDF Files | Fixora",
+      "Merge PDF Online - Combine PDF Files | Fixora",
     seoDescription:
       "Merge multiple PDF files into one document with Fixora. A simple online PDF merger for combining your files.",
     keywords:
       "merge pdf combine pdf pdf merger join pdf files combine documents",
     pdfAction: "merge",
+    available: true,
   },
   {
     id: "pdf-splitter",
     route: "/tools/pdf-splitter",
+    category: "pdf",
     name: "PDF Splitter",
     icon: "split",
     description:
       "Split a PDF and extract the pages you actually need.",
     seoTitle:
-      "Split PDF Online — Extract PDF Pages | Fixora",
+      "Split PDF Online - Extract PDF Pages | Fixora",
     seoDescription:
       "Split PDF files online with Fixora and extract the pages you need from your documents.",
     keywords:
       "split pdf pdf splitter extract pdf pages separate pdf split document",
     pdfAction: "split",
+    available: true,
   },
   {
     id: "pdf-tools",
     route: "/tools/pdf-tools",
+    category: "pdf",
     name: "PDF Tools",
     icon: "pdf",
     description:
       "Access Fixora's PDF tools from one place.",
     seoTitle:
-      "PDF Tools Online — Compress, Merge & Split PDFs | Fixora",
+      "PDF Tools Online - Compress, Merge & Split PDFs | Fixora",
     seoDescription:
       "Use Fixora's online PDF tools to compress, merge and split PDF files from one simple workspace.",
     keywords:
       "pdf tools online pdf tools pdf toolkit compress pdf merge pdf split pdf",
+    available: true,
   },
 ]
 
@@ -95,7 +150,7 @@ const steps = [
     icon: "upload",
     title: "Upload Your File",
     description:
-      "Upload your image or PDF and let Fixora handle the work.",
+      "Upload your file and let Fixora handle the work.",
   },
   {
     number: "03",
@@ -174,6 +229,45 @@ function AppIcon({ type, size = 25 }) {
     )
   }
 
+  if (type === "ai") {
+    return (
+      <svg {...common}>
+        <path d="M12 3v3" />
+        <path d="M12 18v3" />
+        <path d="M3 12h3" />
+        <path d="M18 12h3" />
+        <path d="m5.6 5.6 2.1 2.1" />
+        <path d="m16.3 16.3 2.1 2.1" />
+        <path d="m18.4 5.6-2.1 2.1" />
+        <path d="m7.7 16.3-2.1 2.1" />
+        <circle cx="12" cy="12" r="4" />
+      </svg>
+    )
+  }
+
+  if (type === "creator") {
+    return (
+      <svg {...common}>
+        <path d="M4 5h16v14H4z" />
+        <path d="m9 9 6 3-6 3z" />
+      </svg>
+    )
+  }
+
+  if (type === "calculator") {
+    return (
+      <svg {...common}>
+        <rect x="5" y="3" width="14" height="18" rx="2" />
+        <path d="M8 7h8" />
+        <path d="M8 11h2" />
+        <path d="M14 11h2" />
+        <path d="M8 15h2" />
+        <path d="M14 15h2" />
+        <path d="M8 18h8" />
+      </svg>
+    )
+  }
+
   if (type === "search") {
     return (
       <svg {...common}>
@@ -206,7 +300,10 @@ function AppIcon({ type, size = 25 }) {
   return null
 }
 
-function BackButton({ onClick, children = "< Back to Tools" }) {
+function BackButton({
+  onClick,
+  children = "Back to Tools",
+}) {
   return (
     <button
       onClick={onClick}
@@ -226,26 +323,55 @@ function BackButton({ onClick, children = "< Back to Tools" }) {
   )
 }
 
+function setMetaTag(attribute, value, content) {
+  let tag = document.querySelector(
+    `meta[${attribute}="${value}"]`
+  )
+
+  if (!tag) {
+    tag = document.createElement("meta")
+    tag.setAttribute(attribute, value)
+    document.head.appendChild(tag)
+  }
+
+  tag.setAttribute("content", content)
+}
+
 function updateDocumentMeta(tool) {
-  const title = tool ? tool.seoTitle : "Fixora — Simple Online File Tools"
+  const title = tool
+    ? tool.seoTitle
+    : "Fixora - Simple Online Tools for Everyday Tasks"
 
   const description = tool
     ? tool.seoDescription
-    : "Fixora provides fast, simple online tools for compressing images, managing PDF files, and handling everyday file tasks."
+    : "Fixora provides simple online tools for images, PDFs, productivity, creators and everyday digital tasks."
+
+  const path = tool?.route || "/"
+  const canonicalUrl = `${SITE_URL}${path}`
 
   document.title = title
 
-  let descriptionTag = document.querySelector('meta[name="description"]')
+  setMetaTag("name", "description", description)
 
-  if (!descriptionTag) {
-    descriptionTag = document.createElement("meta")
-    descriptionTag.setAttribute("name", "description")
-    document.head.appendChild(descriptionTag)
-  }
+  setMetaTag(
+    "name",
+    "robots",
+    "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  )
 
-  descriptionTag.setAttribute("content", description)
+  setMetaTag("property", "og:title", title)
+  setMetaTag("property", "og:description", description)
+  setMetaTag("property", "og:url", canonicalUrl)
+  setMetaTag("property", "og:type", "website")
+  setMetaTag("property", "og:site_name", "Fixora")
 
-  let canonical = document.querySelector('link[rel="canonical"]')
+  setMetaTag("name", "twitter:title", title)
+  setMetaTag("name", "twitter:description", description)
+  setMetaTag("name", "twitter:card", "summary")
+
+  let canonical = document.querySelector(
+    'link[rel="canonical"]'
+  )
 
   if (!canonical) {
     canonical = document.createElement("link")
@@ -253,8 +379,7 @@ function updateDocumentMeta(tool) {
     document.head.appendChild(canonical)
   }
 
-  const canonicalPath = tool?.route || "/"
-  canonical.setAttribute("href", window.location.origin + canonicalPath)
+  canonical.setAttribute("href", canonicalUrl)
 }
 
 function navigateTo(path, setPath) {
@@ -265,7 +390,11 @@ function navigateTo(path, setPath) {
 
   window.history.pushState({}, "", path)
   setPath(path)
-  window.scrollTo({ top: 0, behavior: "smooth" })
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  })
 }
 
 function ToolPage({ tool, onBack }) {
@@ -332,12 +461,22 @@ function ToolPage({ tool, onBack }) {
             margin: "45px auto 70px",
           }}
         >
-          {tool.id === "image-compressor" && <ImageCompressor />}
+          {tool.id === "image-compressor" && (
+            <ImageCompressor />
+          )}
+
           {tool.id === "pdf-compressor" && (
             <PdfTools initialAction="compress" />
           )}
-          {tool.id === "pdf-merger" && <PdfTools initialAction="merge" />}
-          {tool.id === "pdf-splitter" && <PdfTools initialAction="split" />}
+
+          {tool.id === "pdf-merger" && (
+            <PdfTools initialAction="merge" />
+          )}
+
+          {tool.id === "pdf-splitter" && (
+            <PdfTools initialAction="split" />
+          )}
+
           {tool.id === "pdf-tools" && <PdfTools />}
         </section>
 
@@ -377,14 +516,179 @@ function ToolPage({ tool, onBack }) {
                 lineHeight: "1.8",
               }}
             >
-              Fixora is designed to make common file tasks easier to complete
-              online. Choose the tool, work with your file, and get back to
-              what you were doing.
+              Fixora is designed to make common digital tasks
+              easier to complete online. Choose the tool,
+              work with your file, and get back to what you
+              were doing.
             </p>
           </div>
         </section>
       </main>
     </div>
+  )
+}
+
+function CategorySection({ openTool }) {
+  const availableCategories = categories.filter(
+    (category) =>
+      category.status === "available"
+  )
+
+  const comingCategories = categories.filter(
+    (category) =>
+      category.status === "coming"
+  )
+
+  return (
+    <section
+      style={{
+        width: "min(1100px, calc(100% - 40px))",
+        margin: "20px auto 80px",
+      }}
+    >
+      <p className="eyebrow">EXPLORE FIXORA</p>
+
+      <h2
+        style={{
+          margin: "0",
+          color: "#f8fafc",
+          fontSize: "clamp(32px, 5vw, 48px)",
+          letterSpacing: "-2px",
+          lineHeight: "1.05",
+        }}
+      >
+        One place for useful digital tools.
+      </h2>
+
+      <p className="how-intro">
+        Start with our available tools today. More useful
+        categories are being built for the next stages of Fixora.
+      </p>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(190px, 1fr))",
+          gap: "14px",
+          marginTop: "32px",
+        }}
+      >
+        {availableCategories.map((category) => (
+          <button
+            key={category.id}
+            onClick={() => {
+              if (category.id === "image") {
+                openTool("image-compressor")
+              }
+
+              if (category.id === "pdf") {
+                openTool("pdf-tools")
+              }
+            }}
+            style={categoryCardStyle}
+          >
+            <span style={categoryIconStyle}>
+              <AppIcon
+                type={category.icon}
+                size={25}
+              />
+            </span>
+
+            <strong
+              style={{
+                display: "block",
+                color: "#f8fafc",
+                fontSize: "17px",
+              }}
+            >
+              {category.name}
+            </strong>
+
+            <span
+              style={{
+                display: "block",
+                marginTop: "9px",
+                color: "#94a3b8",
+                lineHeight: "1.6",
+                fontSize: "13px",
+              }}
+            >
+              {category.description}
+            </span>
+
+            <span
+              style={{
+                display: "inline-block",
+                marginTop: "18px",
+                color: "#a78bfa",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Explore category
+            </span>
+          </button>
+        ))}
+
+        {comingCategories.map((category) => (
+          <div
+            key={category.id}
+            style={{
+              ...categoryCardStyle,
+              cursor: "default",
+              opacity: 0.78,
+            }}
+          >
+            <span style={categoryIconStyle}>
+              <AppIcon
+                type={category.icon}
+                size={25}
+              />
+            </span>
+
+            <strong
+              style={{
+                display: "block",
+                color: "#f8fafc",
+                fontSize: "17px",
+              }}
+            >
+              {category.name}
+            </strong>
+
+            <span
+              style={{
+                display: "block",
+                marginTop: "9px",
+                color: "#94a3b8",
+                lineHeight: "1.6",
+                fontSize: "13px",
+              }}
+            >
+              {category.description}
+            </span>
+
+            <span
+              style={{
+                display: "inline-block",
+                marginTop: "18px",
+                padding: "5px 9px",
+                borderRadius: "999px",
+                color: "#94a3b8",
+                background: "rgba(255,255,255,.05)",
+                border:
+                  "1px solid rgba(255,255,255,.08)",
+                fontSize: "11px",
+                fontWeight: "800",
+              }}
+            >
+              Coming soon
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -416,14 +720,18 @@ function HomePage({
     )
   }
 
-  const showSuggestions = search.trim().length > 0
+  const showSuggestions =
+    search.trim().length > 0
 
   return (
     <div className="app">
       <header className="header">
         <button
           onClick={() =>
-            window.scrollTo({ top: 0, behavior: "smooth" })
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
           }
           style={plainButtonStyle}
           aria-label="Go to Fixora home"
@@ -431,9 +739,13 @@ function HomePage({
           <div className="logo">Fixora</div>
         </button>
 
-        <nav>
+        <nav aria-label="Main navigation">
           <a href="#tools">Tools</a>
+
+          <a href="#categories">Categories</a>
+
           <a href="#how">How it works</a>
+
           <button
             onClick={() => setPage("contact")}
             style={navButtonStyle}
@@ -445,17 +757,19 @@ function HomePage({
 
       <main>
         <section className="hero">
-          <p className="eyebrow">DIGITAL TOOLS, MADE SIMPLE</p>
+          <p className="eyebrow">
+            DIGITAL TOOLS, MADE SIMPLE
+          </p>
 
           <h1>
-            Get your files ready
+            Get more done
             <br />
             in seconds.
           </h1>
 
           <p className="subtitle">
-            Compress images, manage PDFs and handle everyday file tasks with
-            fast, simple online tools.
+            Simple online tools for files, documents,
+            creators, productivity and everyday digital tasks.
           </p>
 
           <div
@@ -468,7 +782,9 @@ function HomePage({
             <input
               type="text"
               value={search}
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={(event) =>
+                setSearch(event.target.value)
+              }
               onKeyDown={(event) => {
                 if (event.key === "Enter") {
                   const tool = findMatchingTool()
@@ -512,80 +828,90 @@ function HomePage({
                   right: 0,
                   padding: "8px",
                   borderRadius: "16px",
-                  border: "1px solid rgba(255,255,255,.1)",
+                  border:
+                    "1px solid rgba(255,255,255,.1)",
                   background: "rgba(15,23,42,.97)",
-                  boxShadow: "0 20px 60px rgba(0,0,0,.35)",
+                  boxShadow:
+                    "0 20px 60px rgba(0,0,0,.35)",
                   backdropFilter: "blur(18px)",
                 }}
               >
                 {filteredTools.length > 0 ? (
-                  filteredTools.slice(0, 4).map((tool) => (
-                    <button
-                      key={tool.id}
-                      onClick={() => openTool(tool.id)}
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "14px",
-                        padding: "13px 14px",
-                        border: "none",
-                        borderRadius: "11px",
-                        color: "#e2e8f0",
-                        background: "transparent",
-                        cursor: "pointer",
-                        textAlign: "left",
-                      }}
-                      onMouseEnter={(event) => {
-                        event.currentTarget.style.background =
-                          "rgba(255,255,255,.06)"
-                      }}
-                      onMouseLeave={(event) => {
-                        event.currentTarget.style.background =
-                          "transparent"
-                      }}
-                    >
-                      <span
+                  filteredTools
+                    .slice(0, 5)
+                    .map((tool) => (
+                      <button
+                        key={tool.id}
+                        onClick={() =>
+                          openTool(tool.id)
+                        }
                         style={{
-                          width: "38px",
-                          height: "38px",
-                          flexShrink: 0,
-                          display: "grid",
-                          placeItems: "center",
-                          borderRadius: "10px",
-                          color: "#c4b5fd",
-                          background:
-                            "linear-gradient(135deg, rgba(139,92,246,.16), rgba(6,182,212,.08))",
-                          border: "1px solid rgba(139,92,246,.18)",
+                          width: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "14px",
+                          padding: "13px 14px",
+                          border: "none",
+                          borderRadius: "11px",
+                          color: "#e2e8f0",
+                          background: "transparent",
+                          cursor: "pointer",
+                          textAlign: "left",
+                        }}
+                        onMouseEnter={(event) => {
+                          event.currentTarget.style.background =
+                            "rgba(255,255,255,.06)"
+                        }}
+                        onMouseLeave={(event) => {
+                          event.currentTarget.style.background =
+                            "transparent"
                         }}
                       >
-                        <AppIcon type={tool.icon} size={20} />
-                      </span>
-
-                      <span>
-                        <strong
-                          style={{
-                            display: "block",
-                            fontSize: "14px",
-                            color: "#f8fafc",
-                          }}
-                        >
-                          {tool.name}
-                        </strong>
-
                         <span
                           style={{
-                            display: "block",
-                            marginTop: "3px",
-                            color: "#64748b",
-                            fontSize: "12px",
+                            width: "38px",
+                            height: "38px",
+                            flexShrink: 0,
+                            display: "grid",
+                            placeItems: "center",
+                            borderRadius: "10px",
+                            color: "#c4b5fd",
+                            background:
+                              "linear-gradient(135deg, rgba(139,92,246,.16), rgba(6,182,212,.08))",
+                            border:
+                              "1px solid rgba(139,92,246,.18)",
                           }}
                         >
-                          {tool.description}
+                          <AppIcon
+                            type={tool.icon}
+                            size={20}
+                          />
                         </span>
-                      </span>
-                    </button>
-                  ))
+
+                        <span>
+                          <strong
+                            style={{
+                              display: "block",
+                              fontSize: "14px",
+                              color: "#f8fafc",
+                            }}
+                          >
+                            {tool.name}
+                          </strong>
+
+                          <span
+                            style={{
+                              display: "block",
+                              marginTop: "3px",
+                              color: "#64748b",
+                              fontSize: "12px",
+                            }}
+                          >
+                            {tool.description}
+                          </span>
+                        </span>
+                      </button>
+                    ))
                 ) : (
                   <div
                     style={{
@@ -595,8 +921,8 @@ function HomePage({
                       textAlign: "left",
                     }}
                   >
-                    No matching tool yet. Try searching for PDF, image,
-                    compress, merge or split.
+                    No matching tool yet. Try searching
+                    for PDF, image, compress, merge or split.
                   </div>
                 )}
               </div>
@@ -615,16 +941,27 @@ function HomePage({
             <span style={pillStyle}>Free to use</span>
             <span style={pillStyle}>Fast workflow</span>
             <span style={pillStyle}>No installation</span>
+            <span style={pillStyle}>More tools coming</span>
           </div>
         </section>
 
+        <section
+          id="categories"
+          style={{ paddingTop: "20px" }}
+        >
+          <CategorySection
+            openTool={openTool}
+          />
+        </section>
+
         <section id="tools" className="tools">
-          <p className="eyebrow">FIXORA TOOLS</p>
+          <p className="eyebrow">AVAILABLE TOOLS</p>
 
           <h2>Tools that get the job done.</h2>
 
           <p className="how-intro">
-            Start with the tool you need, process your file and move on.
+            Start with the tools currently available on Fixora.
+            New tools will be added in focused groups.
           </p>
 
           {filteredTools.length === 0 ? (
@@ -654,10 +991,14 @@ function HomePage({
                       color: "#c4b5fd",
                       background:
                         "linear-gradient(135deg, rgba(139,92,246,.16), rgba(6,182,212,.08))",
-                      border: "1px solid rgba(139,92,246,.18)",
+                      border:
+                        "1px solid rgba(139,92,246,.18)",
                     }}
                   >
-                    <AppIcon type={tool.icon} size={26} />
+                    <AppIcon
+                      type={tool.icon}
+                      size={26}
+                    />
                   </div>
 
                   <p
@@ -670,15 +1011,21 @@ function HomePage({
                       textTransform: "uppercase",
                     }}
                   >
-                    Online Tool
+                    {tool.category === "image"
+                      ? "Image Tool"
+                      : "PDF Tool"}
                   </p>
 
                   <h3>{tool.name}</h3>
 
                   <p>{tool.description}</p>
 
-                  <button onClick={() => openTool(tool.id)}>
-                    Open Tool -&gt;
+                  <button
+                    onClick={() =>
+                      openTool(tool.id)
+                    }
+                  >
+                    Open Tool
                   </button>
                 </div>
               ))}
@@ -697,10 +1044,12 @@ function HomePage({
               margin: "0 auto 75px",
               padding: "34px",
               borderRadius: "24px",
-              border: "1px solid rgba(255,255,255,.1)",
+              border:
+                "1px solid rgba(255,255,255,.1)",
               background:
                 "linear-gradient(135deg, rgba(139,92,246,.08), rgba(255,255,255,.035))",
-              boxShadow: "0 20px 70px rgba(0,0,0,.2)",
+              boxShadow:
+                "0 20px 70px rgba(0,0,0,.2)",
             }}
           >
             <p className="eyebrow">WHY FIXORA</p>
@@ -712,7 +1061,8 @@ function HomePage({
             </h2>
 
             <p className="how-intro">
-              Fixora brings useful file tools together in one simple place.
+              Fixora brings useful digital tools together in
+              one simple place.
             </p>
           </div>
 
@@ -726,12 +1076,20 @@ function HomePage({
 
           <div className="steps-grid">
             {steps.map((step) => (
-              <div className="step-card" key={step.number}>
+              <div
+                className="step-card"
+                key={step.number}
+              >
                 <div className="step-top">
-                  <span className="step-number">{step.number}</span>
+                  <span className="step-number">
+                    {step.number}
+                  </span>
 
                   <span className="step-icon">
-                    <AppIcon type={step.icon} size={22} />
+                    <AppIcon
+                      type={step.icon}
+                      size={22}
+                    />
                   </span>
                 </div>
 
@@ -765,8 +1123,8 @@ function HomePage({
               </h3>
 
               <p style={infoTextStyle}>
-                Reduce image size and choose a quality level that fits your
-                needs.
+                Reduce image size and choose a quality
+                level that fits your needs.
               </p>
 
               <button
@@ -775,7 +1133,7 @@ function HomePage({
                 }
                 style={secondaryButtonStyle}
               >
-                Open Image Compressor →
+                Open Image Compressor
               </button>
             </div>
 
@@ -787,15 +1145,15 @@ function HomePage({
               </h3>
 
               <p style={infoTextStyle}>
-                Compress, merge and split PDF documents from one simple
-                workspace.
+                Compress, merge and split PDF documents
+                from one simple workspace.
               </p>
 
               <button
                 onClick={() => openTool("pdf-tools")}
                 style={secondaryButtonStyle}
               >
-                Open PDF Tools →
+                Open PDF Tools
               </button>
             </div>
           </div>
@@ -809,7 +1167,7 @@ function HomePage({
             textAlign: "center",
           }}
         >
-          <p className="eyebrow">START WITH FIXORA</p>
+          <p className="eyebrow">THE FIXORA ROADMAP</p>
 
           <h2
             style={{
@@ -821,13 +1179,14 @@ function HomePage({
               fontWeight: "900",
             }}
           >
-            One task.
+            More useful tools.
             <br />
-            One simple solution.
+            One simple platform.
           </h2>
 
           <p className="how-intro">
-            Choose a tool and get started in seconds.
+            We are building Fixora category by category,
+            focusing on tools people actually search for.
           </p>
 
           <button
@@ -847,7 +1206,7 @@ function HomePage({
                 "0 12px 35px rgba(79,70,229,.3)",
             }}
           >
-            Explore Tools -&gt;
+            Explore Available Tools
           </button>
         </section>
       </main>
@@ -858,12 +1217,16 @@ function HomePage({
             <div className="logo">Fixora</div>
 
             <p>
-              Simple online tools for your everyday file and document tasks.
+              Simple online tools for your everyday digital
+              tasks.
             </p>
           </div>
 
           <div className="footer-links">
             <a href="#tools">Tools</a>
+
+            <a href="#categories">Categories</a>
+
             <a href="#how">How it works</a>
 
             <button onClick={() => setPage("about")}>
@@ -885,7 +1248,8 @@ function HomePage({
         </div>
 
         <div className="footer-bottom">
-          (c) {new Date().getFullYear()} Fixora. All rights reserved.
+          Copyright {new Date().getFullYear()} Fixora.
+          All rights reserved.
         </div>
       </footer>
     </div>
@@ -904,10 +1268,16 @@ function App() {
     const handlePopState = () =>
       setPath(window.location.pathname || "/")
 
-    window.addEventListener("popstate", handlePopState)
+    window.addEventListener(
+      "popstate",
+      handlePopState
+    )
 
     return () =>
-      window.removeEventListener("popstate", handlePopState)
+      window.removeEventListener(
+        "popstate",
+        handlePopState
+      )
   }, [])
 
   const currentTool =
@@ -923,6 +1293,8 @@ function App() {
 
     if (!tool) return
 
+    setPage("home")
+    setSearch("")
     navigateTo(tool.route, setPath)
   }
 
@@ -933,7 +1305,9 @@ function App() {
       window.setTimeout(() => {
         document
           .getElementById("tools")
-          ?.scrollIntoView({ behavior: "smooth" })
+          ?.scrollIntoView({
+            behavior: "smooth",
+          })
       }, 50)
 
       return
@@ -941,7 +1315,9 @@ function App() {
 
     document
       .getElementById("tools")
-      ?.scrollIntoView({ behavior: "smooth" })
+      ?.scrollIntoView({
+        behavior: "smooth",
+      })
   }
 
   if (currentTool) {
@@ -949,14 +1325,16 @@ function App() {
       <div className="app">
         <header className="header">
           <button
-            onClick={() => navigateTo("/", setPath)}
+            onClick={() =>
+              navigateTo("/", setPath)
+            }
             style={plainButtonStyle}
             aria-label="Go to Fixora home"
           >
             <div className="logo">Fixora</div>
           </button>
 
-          <nav>
+          <nav aria-label="Tool navigation">
             <a
               href="/"
               onClick={(event) => {
@@ -965,6 +1343,25 @@ function App() {
               }}
             >
               Tools
+            </a>
+
+            <a
+              href="/#categories"
+              onClick={(event) => {
+                event.preventDefault()
+
+                navigateTo("/", setPath)
+
+                window.setTimeout(() => {
+                  document
+                    .getElementById("categories")
+                    ?.scrollIntoView({
+                      behavior: "smooth",
+                    })
+                }, 50)
+              }}
+            >
+              Categories
             </a>
 
             <a
@@ -997,7 +1394,9 @@ function App() {
 
         <ToolPage
           tool={currentTool}
-          onBack={() => navigateTo("/", setPath)}
+          onBack={() =>
+            navigateTo("/", setPath)
+          }
         />
       </div>
     )
@@ -1006,7 +1405,9 @@ function App() {
   if (page === "privacy") {
     return (
       <div className="app">
-        <Privacy onBack={() => setPage("home")} />
+        <Privacy
+          onBack={() => setPage("home")}
+        />
       </div>
     )
   }
@@ -1014,7 +1415,9 @@ function App() {
   if (page === "terms") {
     return (
       <div className="app">
-        <Terms onBack={() => setPage("home")} />
+        <Terms
+          onBack={() => setPage("home")}
+        />
       </div>
     )
   }
@@ -1030,7 +1433,9 @@ function App() {
   if (page === "contact") {
     return (
       <div className="app">
-        <Contact onBack={() => setPage("home")} />
+        <Contact
+          onBack={() => setPage("home")}
+        />
       </div>
     )
   }
@@ -1118,6 +1523,32 @@ const pillStyle = {
   background: "rgba(255,255,255,.035)",
   fontSize: "12px",
   fontWeight: "700",
+}
+
+const categoryCardStyle = {
+  padding: "24px",
+  borderRadius: "18px",
+  border: "1px solid rgba(255,255,255,.08)",
+  background:
+    "linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018))",
+  textAlign: "left",
+  cursor: "pointer",
+  transition:
+    "transform .2s ease, border-color .2s ease",
+}
+
+const categoryIconStyle = {
+  width: "48px",
+  height: "48px",
+  display: "grid",
+  placeItems: "center",
+  marginBottom: "18px",
+  borderRadius: "14px",
+  color: "#c4b5fd",
+  background:
+    "linear-gradient(135deg, rgba(139,92,246,.16), rgba(6,182,212,.08))",
+  border:
+    "1px solid rgba(139,92,246,.18)",
 }
 
 export default App

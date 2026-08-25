@@ -1,42 +1,30 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿@"
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/</loc>
+    <loc>https://fixora-tools.pages.dev/</loc>
   </url>
 
   <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/tools/image-compressor</loc>
+    <loc>https://fixora-tools.pages.dev/tools/image-compressor</loc>
   </url>
 
   <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/tools/pdf-tools</loc>
+    <loc>https://fixora-tools.pages.dev/tools/pdf-tools</loc>
   </url>
 
   <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/tools/pdf-compressor</loc>
+    <loc>https://fixora-tools.pages.dev/tools/pdf-compressor</loc>
   </url>
 
   <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/tools/pdf-merger</loc>
+    <loc>https://fixora-tools.pages.dev/tools/pdf-merger</loc>
   </url>
 
   <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/tools/pdf-splitter</loc>
+    <loc>https://fixora-tools.pages.dev/tools/pdf-splitter</loc>
   </url>
 
-  <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/guides/compress-images-online/</loc>
-  </url>
-
-  <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/guides/compress-pdf-online/</loc>
-  </url>
-
-  <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/guides/merge-pdf-online/</loc>
-  </url>
-
-  <url>
-    <loc>https://kaleidoscopic-crisp-b10c94.netlify.app/guides/split-pdf-online/</loc>
-  </url>
 </urlset>
+"@ | Set-Content .\public\sitemap.xml -Encoding utf8
