@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+﻿import { useEffect, useState } from "react"
 import ImageCompressor from "./tools/ImageCompressor"
 import PdfTools from "./tools/PdfTools"
 import Privacy from "./Privacy"
 import Terms from "./Terms"
 import About from "./About.jsx"
 import Contact from "./Contact.jsx"
+import AdsterraNative from "./AdsterraNative.jsx"
 
 const SITE_URL = "https://fixora-tools.pages.dev"
 
@@ -954,6 +955,8 @@ function HomePage({
           />
         </section>
 
+        <AdsterraNative />
+
         <section id="tools" className="tools">
           <p className="eyebrow">AVAILABLE TOOLS</p>
 
@@ -1552,3 +1555,4 @@ const categoryIconStyle = {
 }
 
 export default App
+
