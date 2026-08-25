@@ -1,5 +1,4 @@
-﻿@"
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
@@ -26,5 +25,20 @@
     <loc>https://fixora-tools.pages.dev/tools/pdf-splitter</loc>
   </url>
 
+  <url>
+    <loc>https://fixora-tools.pages.dev/guides/compress-images-online/</loc>
+  </url>
+
+  <url>
+    <loc>https://fixora-tools.pages.dev/guides/compress-pdf-online/</loc>
+  </url>
+
+  <url>
+    <loc>https://fixora-tools.pages.dev/guides/merge-pdf-online/</loc>
+  </url>
+
+  <url>
+    <loc>https://fixora-tools.pages.dev/guides/split-pdf-online/</loc>
+  </url>
+
 </urlset>
-"@ | Set-Content .\public\sitemap.xml -Encoding utf8
