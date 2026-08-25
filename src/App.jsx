@@ -6,6 +6,7 @@ import Terms from "./Terms"
 import About from "./About.jsx"
 import Contact from "./Contact.jsx"
 import AdsterraNative from "./AdsterraNative.jsx"
+import AdsterraBanner from "./AdsterraBanner.jsx"
 
 const SITE_URL = "https://fixora-tools.pages.dev"
 
@@ -957,6 +958,8 @@ function HomePage({
 
         <AdsterraNative />
 
+        <AdsterraBanner />
+
         <section id="tools" className="tools">
           <p className="eyebrow">AVAILABLE TOOLS</p>
 
@@ -1555,4 +1558,6 @@ const categoryIconStyle = {
 }
 
 export default App
+
+
 
