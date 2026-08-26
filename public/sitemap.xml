@@ -1,44 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://fixora-tools.pages.dev/</loc>
   </url>
-
+  <url>
+    <loc>https://fixora-tools.pages.dev/about</loc>
+  </url>
+  <url>
+    <loc>https://fixora-tools.pages.dev/privacy</loc>
+  </url>
+  <url>
+    <loc>https://fixora-tools.pages.dev/terms</loc>
+  </url>
+  <url>
+    <loc>https://fixora-tools.pages.dev/contact</loc>
+  </url>
   <url>
     <loc>https://fixora-tools.pages.dev/tools/image-compressor</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/tools/pdf-tools</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/tools/pdf-compressor</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/tools/pdf-merger</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/tools/pdf-splitter</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/guides/compress-images-online/</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/guides/compress-pdf-online/</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/guides/merge-pdf-online/</loc>
   </url>
-
   <url>
     <loc>https://fixora-tools.pages.dev/guides/split-pdf-online/</loc>
   </url>
-
 </urlset>

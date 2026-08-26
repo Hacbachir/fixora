@@ -1,6 +1,3 @@
-﻿@"
-User-agent: *
+﻿User-agent: *
 Allow: /
-
 Sitemap: https://fixora-tools.pages.dev/sitemap.xml
-"@ | Set-Content .\public\robots.txt -Encoding utf8
